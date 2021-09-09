@@ -17,9 +17,12 @@ public class Secure extends Controller {
         login();
     }
 
-    public static void authenticate(String username, String password){
+     public static void authenticate(String username, String password){
         User u = User.loadUser(username);
-        if (u != null && u.getPassword().equals(HashUtils.getMd5(password))){
+        String user1,password1;
+        user1=username.trim();
+        password1=username.trim();
+        if (user1.length() > 0 && password1.length() > 0 && u != null && u.getPassword().equals(HashUtils.getMd5(password))){
             session.put("username", username);
             session.put("password", password);
             Application.index();
@@ -27,6 +30,5 @@ public class Secure extends Controller {
             flash.put("error", Messages.get("Public.login.error.credentials"));
             login();
         }
-
     }
 }
